@@ -1,0 +1,117 @@
+﻿@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @*@Scripts.Render("~/bundles/myScript")*@
+    @Styles.Render("~/Content/css")
+
+    <script type="text/javascript">
+        let endOfTime = parseInt('@System.Configuration.ConfigurationManager.AppSettings["EndOfTime"]');
+        let intervalID, time;
+        let stateA, stateB, stateC;
+        let customerNumber, currentCustomer;
+        let operation, timeNeeded;
+        let resultStr;
+
+        $(function () {
+            initialiseSystem();
+
+            $("#btnStart").click(function () {
+                initialiseSystem();
+                $("#resultTable").show();
+                $("#btnStart").hide(); $("#btnStop").show();
+                intervalID = setInterval(work, 1000);
+            });
+
+            $("#btnStop").click(function () {
+                stopQueue();
+            });
+        });
+
+        function initialiseSystem() {
+            time = 0;
+            stateA = "-", stateB = "-", stateC = "-";
+            customerNumber = 0, currentCustomer = "";
+            operation = "", timeNeeded = 0;
+            resultStr = "-";
+
+            $("#resultTable").find("tr:gt(0)").remove();
+            $.post("/Home/SystemPreparation");
+        }
+
+        function work() {
+            if (++time <= endOfTime) {
+                getWindowState();
+                createCustomer();
+                addRow();
+            }
+            else {
+                stopQueue();
+                alert("Рабочий день окончен.\nМожно ознакомиться с Журналом и Статистикой");
+            }
+        }
+
+        function getWindowState() {
+            $.getJSON("/Home/GetWindowState", null, function (data) {
+                stateA = data[0].CurrentClient;
+                stateB = data[1].CurrentClient;
+                stateC = data[2].CurrentClient;
+            });
+        }
+
+        function getRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function createCustomer() {
+            if (getRandomNumber(0, 1) === 1) {
+                currentCustomer = "X" + ++customerNumber;
+                operation = "O" + getRandomNumber(1, 3);
+                timeNeeded = getRandomNumber(2, 8);
+                sendCustomerToServer();
+                resultStr = "Пришёл клиент " + currentCustomer + " с операцией " + operation + " сложности " + timeNeeded;
+            }
+            else resultStr = "-";
+        }
+
+        function sendCustomerToServer() {
+            let customer = {
+                queueTime: time,
+                customer: currentCustomer,
+                operation: operation,
+                timeNeeded: timeNeeded
+            };
+            $.post("/Home/Queuing", customer, null, "json");
+        }
+
+        function addRow() {
+            $('#resultTable > tbody:last').
+                append("<tr><td>" + time + "</td>" +
+                "<td>" + stateA + "</td><td>" + stateB + "</td><td>" + stateC + "</td>" +
+                "<td>" + resultStr + "</td></tr>");
+        }
+
+        function stopQueue() {
+            clearInterval(intervalID);
+            $("#btnStop").hide();
+            $("#btnStart").show();
+        }
+    </script>
+}
+
+<div class="Buttons">
+    <input type="button" id="btnStart" value="Запустить очередь" />
+    <input type="button" id="btnStop" value="Остановить очередь" hidden />
+</div>
+
+<table id="resultTable" cellpadding="4" cellspacing="1" hidden>
+    <thead>
+        <tr>
+            <th width="70px"> </th>
+            <th width="200px">A</th>
+            <th width="200px">B</th>
+            <th width="200px">C</th>
+            <th>Клиенты</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>

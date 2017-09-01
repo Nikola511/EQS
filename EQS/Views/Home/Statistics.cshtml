@@ -1,0 +1,97 @@
+﻿@{ ViewBag.Title = "Статистика"; }
+
+<h2>Статистика по проведенным операциям</h2>
+<p />
+<table class="table">
+    <thead>
+        <tr>
+            <th width="200px">Общая информация</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Количество пришедших клиентов: @ViewData["nIncomingCustomers"]</td>
+        </tr>
+        <tr>
+            <td>Средняя сложность операций: @ViewData["nAverageDiff"]</td>
+        </tr>
+        <tr>
+            <td>Отказано в обслуживании: @ViewData["nDeniedService"]</td>
+        </tr>
+        <tr>
+            <td>Проведено операций O1 в количестве: @ViewData["sumOperationsO1"] суммарной сложности: @ViewData["sumDifficultyO1"]</td>
+        </tr>
+        <tr>
+            <td>Проведено операций O2 в количестве: @ViewData["sumOperationsO2"] суммарной сложности: @ViewData["sumDifficultyO2"]</td>
+        </tr>
+        <tr>
+            <td>Проведено операций O3 в количестве: @ViewData["sumOperationsO3"] суммарной сложности: @ViewData["sumDifficultyO3"]</td>
+        </tr>
+    </tbody>
+</table>
+<p />
+<table class="table">
+    <thead>
+        <tr>
+            <th width="200px">Окно A</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Средняя сложность операций: @ViewData["nAverageDiffA"]</td>
+        </tr>
+        <tr>
+            <td>Количество обслуженных клиентов: @ViewData["nServedCustomersA"]</td>
+        </tr>       
+        <tr>
+            <td>Проведено операций O1 в количестве: @ViewData["sumOperationsO1A"] суммарной сложности: @ViewData["sumDifficultyO1A"]</td>
+        </tr>
+        <tr>
+            <td>Проведено операций O2 в количестве: @ViewData["sumOperationsO2A"] суммарной сложности: @ViewData["sumDifficultyO2A"]</td>
+        </tr>
+    </tbody>
+</table>
+<p />
+<table class="table">
+    <thead>
+        <tr>
+            <th width="200px">Окно B</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Средняя сложность операций: @ViewData["nAverageDiffB"]</td>
+        </tr>
+        <tr>
+            <td>Количество обслуженных клиентов: @ViewData["nServedCustomersB"]</td>
+        </tr>
+        <tr>
+            <td>Проведено операций O2 в количестве: @ViewData["sumOperationsO2B"] суммарной сложности: @ViewData["sumDifficultyO2B"]</td>
+        </tr>
+        <tr>
+            <td>Проведено операций O3 в количестве: @ViewData["sumOperationsO3B"] суммарной сложности: @ViewData["sumDifficultyO3B"]</td>
+        </tr>
+    </tbody>
+</table>
+<p />
+<table class="table">
+    <thead>
+        <tr>
+            <th width="200px">Окно C</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Средняя сложность операций: @ViewData["nAverageDiffC"]</td>
+        </tr>
+        <tr>
+            <td>Количество обслуженных клиентов: @ViewData["nServedCustomersC"]</td>
+        </tr>
+        <tr>
+            <td>Проведено операций O1 в количестве: @ViewData["sumOperationsO1C"] суммарной сложности: @ViewData["sumDifficultyO1C"]</td>
+        </tr>
+        <tr>
+            <td>Проведено операций O3 в количестве: @ViewData["sumOperationsO3C"] суммарной сложности: @ViewData["sumDifficultyO3C"]</td>
+        </tr>
+    </tbody>
+</table>

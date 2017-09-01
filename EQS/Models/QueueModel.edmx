@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище Database1Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Operation" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TimeNeeded" Type="int" Nullable="false" />
+          <Property Name="QueueTime" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LogSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Time" Type="int" Nullable="false" />
+          <Property Name="Client" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Operation" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TimeNeeded" Type="int" Nullable="false" />
+          <Property Name="Event" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Window" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="QueueSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QueueTime" Type="int" Nullable="false" />
+          <Property Name="Client" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Operation" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TimeNeeded" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WindowSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UnavailableOperation" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CurrentClient" Type="nvarchar(max)" />
+          <Property Name="RestOfTime" Type="int" />
+        </EntityType>
+        <EntityContainer Name="Хранилище Database1ModelContainer">
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LogSet" EntityType="Self.LogSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QueueSet" EntityType="Self.QueueSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WindowSet" EntityType="Self.WindowSet" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Database1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="LogSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Time" Type="Int32" Nullable="false" />
+          <Property Name="Client" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Event" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Window" Type="String" Nullable="true" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Operation" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TimeNeeded" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QueueSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QueueTime" Type="Int32" Nullable="false" />
+          <Property Name="Client" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Operation" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TimeNeeded" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WindowSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UnavailableOperation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CurrentClient" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="RestOfTime" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="Database1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="LogSet" EntityType="Self.LogSet" />
+          <EntitySet Name="QueueSet" EntityType="Self.QueueSet" />
+          <EntitySet Name="WindowSet" EntityType="Self.WindowSet" />
+          <EntitySet Name="Customer" EntityType="Database1Model.Customer" />
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Operation" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TimeNeeded" Type="Int32" Nullable="false" />
+          <Property Name="QueueTime" Type="Int32" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Database1ModelContainer" CdmEntityContainer="Database1Entities">
+          <EntitySetMapping Name="LogSet">
+            <EntityTypeMapping TypeName="Database1Model.LogSet">
+              <MappingFragment StoreEntitySet="LogSet">
+                <ScalarProperty Name="TimeNeeded" ColumnName="TimeNeeded" />
+                <ScalarProperty Name="Operation" ColumnName="Operation" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+                <ScalarProperty Name="Event" ColumnName="Event" />
+                <ScalarProperty Name="Window" ColumnName="Window" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QueueSet">
+            <EntityTypeMapping TypeName="Database1Model.QueueSet">
+              <MappingFragment StoreEntitySet="QueueSet">
+                <ScalarProperty Name="Operation" ColumnName="Operation" />
+                <ScalarProperty Name="TimeNeeded" ColumnName="TimeNeeded" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="QueueTime" ColumnName="QueueTime" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WindowSet">
+            <EntityTypeMapping TypeName="Database1Model.WindowSet">
+              <MappingFragment StoreEntitySet="WindowSet">
+                <ScalarProperty Name="RestOfTime" ColumnName="RestOfTime" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UnavailableOperation" ColumnName="UnavailableOperation" />
+                <ScalarProperty Name="CurrentClient" ColumnName="CurrentClient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="Database1Model.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="QueueTime" ColumnName="QueueTime" />
+                <ScalarProperty Name="TimeNeeded" ColumnName="TimeNeeded" />
+                <ScalarProperty Name="Operation" ColumnName="Operation" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
